@@ -1,6 +1,6 @@
 % Example-18: foodora hub pdf
-function [png] = Foodora_Hub_pdf() 
-
+function [png] = FoodoraHub_pdf() 
+% PDF file of Foodora Hub 
 png.PN_name='Foodora HUB';
 
 png.set_of_Ps = {'pOrder', 'pConfirm', 'pReject_Order', 'pRejected_Order'};
