@@ -1,4 +1,4 @@
-function [png] = connector_pdf() 
+function [png] = Connector_pdf() 
 
 png.PN_name = 'Connector module';
 

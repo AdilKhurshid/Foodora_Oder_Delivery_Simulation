@@ -1,5 +1,5 @@
 % Example-18: foodora hub pdf
-function [png] = foodora_hub_pdf() 
+function [png] = Foodora_Hub_pdf() 
 
 png.PN_name='Foodora HUB';
 

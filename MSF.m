@@ -64,7 +64,7 @@ Number_OF_Bikes = 10; % Avalible Riders on Bikes
 Number_OF_Cars = 10; % Avalible Riders on Cars
 Resturan_Capacity = 5;% Resturant Capacity to handle Order at Particular time
 
- pns = pnstruct({'OrderGen_pdf', 'foodora_hub_pdf', 'connector_pdf', ...
+ pns = pnstruct({'OrderGen_pdf', 'Foodora_Hub_pdf', 'Connector_pdf', ...
      'Resturant_pdf', 'Rider_Check_pdf', 'Food_Delivering_pdf'});
 
 % NO initial tokens
