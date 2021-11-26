@@ -3,10 +3,6 @@ clear all; clc;
 global global_info
 
 % Creating Orders in a normal sequence 
-%closing_time = 2*60;
-%quarters = closing_time/5;
-%order_sequence = zeros(1, quarters+1);
-
 quarters = 40;
 order_sequence = zeros(1,quarters+1);
 for i = 0:quarters
@@ -56,7 +52,7 @@ global_info.CAR.ORDER_ACCEPT_STATUS = true; % Order Accepting or Not
 %Note: if this flag is true the simulation will run in a loop you might not
 %be able to see the order is deliver because the rider will deliver order
 %and return to the cith center Default is False 
-global_info.SET_RIDERS_RETURN = true; % This flag is to allow rider to go back to city Center
+global_info.SET_RIDERS_RETURN = false; % This flag is to allow rider to go back to city Center
 
 
 Number_OF_Cycles = 20; % Avalible Riders on Cycles
@@ -76,7 +72,7 @@ dyn.ft = {'tGEN', 1, 'tComplete_Order', 1, 'allothers',0.1};
 pni = initialdynamics(pns, dyn);
 
 sim = gpensim(pni); % No initial dynamics 
-plotp(sim, {'pCycle_Reach_Des','pBike_Reach_Des', 'pCar_Reach_Des'});
+plotp(sim, {'pCar_Back','pCycle_Back', 'pBike_Back'});
 % plotp(sim, {'pOrder_Wait','pOrder_Complete'});
 prnfinalcolors(sim);  %%%% PRINT RESULTS %%%%%
 

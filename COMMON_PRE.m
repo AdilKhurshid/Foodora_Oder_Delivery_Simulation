@@ -3,6 +3,7 @@ function [fire, transition] = COMMON_PRE(transition)
 
 global global_info 
 
+
 %  Condition To check is Resturant is Open 
 if (strcmpi(transition.name, 'tRes_close'))
     if global_info.RESTURANT_STATUS == false
@@ -91,7 +92,7 @@ elseif (strcmpi(transition.name, 'tOrder_for_Car'))
     transition.selected_tokens = tokID1;
     fire = tokID1;
 elseif (strcmpi(transition.name, 'tCycle_Accept'))
-    if global_info.CYCLE.ORDER_ACCEPT_STATUS == true
+    if global_info.CYCLE.ORDER_ACCEPT_STATUS == true  && ntokens('pCycles') ~= 0
         transition.new_color = global_info.RIDERS_TYPE{1};
         transition.override = 1;
         fire = 1;
@@ -99,13 +100,13 @@ elseif (strcmpi(transition.name, 'tCycle_Accept'))
         fire = 0;
     end
 elseif (strcmpi(transition.name, 'tCycle_Reject'))
-    if global_info.CYCLE.ORDER_ACCEPT_STATUS == false
+    if global_info.CYCLE.ORDER_ACCEPT_STATUS == false || ntokens('pCycles') == 0
         fire = 1;
     else
         fire = 0;
     end
 elseif (strcmpi(transition.name, 'tBike_Accept'))
-    if global_info.BIKE.ORDER_ACCEPT_STATUS == true
+    if global_info.BIKE.ORDER_ACCEPT_STATUS == true && ntokens('pBikes') ~= 0
         transition.new_color = global_info.RIDERS_TYPE{2};
         transition.override = 1;
         fire = 1;
@@ -114,19 +115,19 @@ elseif (strcmpi(transition.name, 'tBike_Accept'))
     end
 
 elseif (strcmpi(transition.name, 'tBike_Reject'))
-    if global_info.BIKE.ORDER_ACCEPT_STATUS == false
+    if global_info.BIKE.ORDER_ACCEPT_STATUS == false || ntokens('pBikes') == 0
         order_color = global_info.ORDER_COLORS{2};
         tokID1 = tokenEXColor('pRi_Order_Recive', 1, {order_color});
         transition.selected_tokens = tokID1;
         transition.new_color = global_info.ORDER_COLORS{1};
         transition.override = 1;
-        fire = tokID1;
+        fire = 1;
     else
         fire = 0;
     end
 
 elseif (strcmpi(transition.name, 'tCar_Accept'))
-    if global_info.CAR.ORDER_ACCEPT_STATUS == true
+    if global_info.CAR.ORDER_ACCEPT_STATUS == true && ntokens('pCars') ~= 0
         transition.new_color = global_info.RIDERS_TYPE{3};
         transition.override = 1;
         fire = 1;
@@ -135,7 +136,7 @@ elseif (strcmpi(transition.name, 'tCar_Accept'))
     end 
 
 elseif (strcmpi(transition.name, 'tCar_Reject'))
-    if global_info.CAR.ORDER_ACCEPT_STATUS == false
+    if global_info.CAR.ORDER_ACCEPT_STATUS == false || ntokens('pCars') == 0
         order_color = global_info.ORDER_COLORS{3};
         tokID1 = tokenEXColor('pRi_Order_Recive', 1, {order_color});
         transition.selected_tokens = tokID1;
@@ -156,7 +157,7 @@ elseif (strcmpi(transition.name, 'tRider_Res_Travel'))
          fire = 0;
      else
          global_info.RIDERS_RES_TRAVEL_LIST(r_indexs(1))=[];
-         fire = 1;
+         fire = 1; 
      end
     end
 elseif (strcmpi(transition.name, 'tCycle_GEN'))
